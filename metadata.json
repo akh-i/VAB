@@ -1,0 +1,8 @@
+{
+  "name": "VAB AI",
+  "description": "An intelligent shopping assistant that identifies products via image or text, searches for real-time prices across retailers, and aggregates reviews using Gemini AI.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
