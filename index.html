@@ -1,25 +1,31 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ShopLens AI - Smart Shopping Assistant</title>
+    <title>VAB SYSTEM | Forensic Shopping Intelligence</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;400;700&family=Inter:wght@300;700;900&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
             },
             colors: {
-              primary: '#6366f1', // Indigo 500
-              secondary: '#a855f7', // Purple 500
+              primary: '#6366f1',
+              secondary: '#a855f7',
+              cyber: '#0ea5e9',
             },
             animation: {
-              'scan': 'scan 2s linear infinite',
+              'scan': 'scan 3s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+              'vab-reveal': 'vab-reveal 4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'data-stream': 'data-stream 20s linear infinite',
+              'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             }
           }
         }
@@ -27,54 +33,78 @@
     </script>
     <style>
       body {
-        background-color: #0f172a;
-        color: #f8fafc;
-      }
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #1e293b; 
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #475569; 
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #64748b; 
+        background-color: #000000;
+        color: #e2e8f0;
+        overflow-x: hidden;
+        font-family: 'Inter', sans-serif;
       }
       
+      @keyframes vab-reveal {
+        0% { opacity: 0; filter: blur(40px) brightness(4); transform: scale(0.5); letter-spacing: 2em; }
+        20% { opacity: 1; filter: blur(20px) brightness(2); transform: scale(1.2); }
+        50% { filter: blur(2px) brightness(1.2); transform: scale(0.95); }
+        100% { opacity: 1; filter: blur(0px) brightness(1); transform: scale(1); letter-spacing: 0.5em; }
+      }
+
       @keyframes scan {
-        0% { top: 0%; opacity: 0; }
+        0% { top: -10%; opacity: 0; }
         10% { opacity: 1; }
         90% { opacity: 1; }
-        100% { top: 100%; opacity: 0; }
+        100% { top: 110%; opacity: 0; }
       }
-      
+
+      @keyframes data-stream {
+        from { transform: translateY(0); }
+        to { transform: translateY(-50%); }
+      }
+
+      .vab-logo-intro {
+        font-size: 8rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        background: linear-gradient(to bottom, #fff, #6366f1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: vab-reveal 4s forwards;
+      }
+
+      .cyber-grid {
+        background-image: linear-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px), 
+                          linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+        background-size: 50px 50px;
+      }
+
       .scan-line {
         position: absolute;
         width: 100%;
-        height: 4px;
-        background: linear-gradient(to right, transparent, #6366f1, #a855f7, transparent);
-        box-shadow: 0 0 10px #6366f1;
-        animation: scan 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        z-index: 20;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #6366f1, #fff, #a855f7, transparent);
+        box-shadow: 0 0 20px rgba(99, 102, 241, 0.8);
+        animation: scan 2.5s infinite;
+        z-index: 50;
       }
+
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
     </style>
-  <script type="importmap">
+    <script type="importmap">
 {
   "imports": {
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "recharts": "https://aistudiocdn.com/recharts@^3.5.0"
+    "react": "https://esm.sh/react@19.0.0",
+    "react-dom": "https://esm.sh/react-dom@19.0.0",
+    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
+    "lucide-react": "https://esm.sh/lucide-react@0.462.0?external=react",
+    "recharts": "https://esm.sh/recharts@2.12.7?external=react,react-dom",
+    "@google/genai": "https://esm.sh/@google/genai@1.34.0",
+    "vite": "https://esm.sh/vite@^7.3.0",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
   }
 }
 </script>
-</head>
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>

@@ -15,6 +15,15 @@ export interface ReviewSummary {
   pros: string[];
   cons: string[];
   summary: string;
+  consensusScore: number; // 0 to 100
+}
+
+export interface MarketIntelligence {
+  priceConfidence: number; // 0 to 100
+  volatility: 'low' | 'medium' | 'high';
+  buyRecommendation: 'buy_now' | 'wait' | 'research';
+  expectedPriceDrop?: string;
+  last30DaysTrend: string;
 }
 
 export interface ProductData {
@@ -25,6 +34,7 @@ export interface ProductData {
   keyFeatures: string[];
   sellers: Seller[];
   reviews: ReviewSummary;
+  intelligence: MarketIntelligence;
 }
 
 export interface GroundingSource {
